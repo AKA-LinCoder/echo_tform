@@ -12,76 +12,76 @@ abstract class TFormCloneable<T extends TFormCloneable<T>> {
 
 class TFormRow implements TFormCloneable<TFormRow> {
   /// 唯一标识
-  String tag;
+  String? tag;
 
   /// 类型
-  String type;
+  String? type;
 
   /// 是否必填
-  bool require;
+  bool? require;
 
   /// 必填项是否显示 * 号
-  bool requireStar;
+  bool? requireStar;
 
   /// 必填项校验不通过提示
-  String requireMsg;
+  String? requireMsg;
 
   /// 自定义校验规则
-  bool Function(TFormRow) validator;
+  bool Function(TFormRow)? validator;
 
   /// 选择类型或者输入类型的值
-  String value;
+  String? value;
 
   /// 标题
   String title;
 
   /// 输入框占位
-  String placeholder;
+  String? placeholder;
 
   /// 是否能编辑
-  bool enabled;
+  bool? enabled;
 
   /// 输入框长度限制
-  int maxLength;
+  int? maxLength;
 
   /// 输入框内容是否加密
-  bool obscureText;
+  bool? obscureText;
 
   /// 键盘类型
-  TextInputType keyboardType;
+  TextInputType? keyboardType;
 
   /// 清除按钮显示模式
-  OverlayVisibilityMode clearButtonMode;
+  OverlayVisibilityMode? clearButtonMode;
 
   /// 输入框文字对齐方式
-  TextAlign textAlign;
+  TextAlign? textAlign;
 
   /// 选择类型的选项，可以是纯字符串，也可以是 TFormOptionModel 对象
-  List options;
+  List? options;
 
   /// textfield 样式配置
-  TFormFieldConfig fieldConfig;
+  TFormFieldConfig? fieldConfig;
 
   /// 输入事件
-  void Function(TFormRow) onChanged;
+  void Function(TFormRow)? onChanged;
 
   /// 点击事件
-  Future Function(BuildContext, TFormRow) onTap;
+  Future Function(BuildContext, TFormRow)? onTap;
 
   /// 自定义 Cell
-  Widget widget;
+  Widget? widget;
 
   /// 通过 builder 的方式自定义 suffixWidget
-  Widget Function(BuildContext, TFormRow) suffixWidget;
+  Widget Function(BuildContext, TFormRow)? suffixWidget;
 
   /// 通过 builder 的方式自定义 Cell
-  Widget Function(BuildContext, TFormRow) widgetBuilder;
+  Widget Function(BuildContext, TFormRow)? widgetBuilder;
 
   ///自定义 widget 对应的 state
   var state;
 
   /// 标记插入删除操作是否显示动画
-  bool animation;
+  bool? animation;
 
   TFormRow({
     this.tag,
@@ -130,7 +130,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.state,
     this.textAlign = TextAlign.left,
   }) {
-    this.type = TFormRowTypeInput;
+    type = TFormRowTypeInput;
   }
 
   /// 单选
@@ -149,7 +149,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.suffixWidget,
     this.textAlign = TextAlign.right,
   }) {
-    this.type = TFormRowTypeSelector;
+    type = TFormRowTypeSelector;
   }
 
   /// 多选
@@ -168,7 +168,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.suffixWidget,
     this.textAlign = TextAlign.right,
   }) {
-    this.type = TFormRowTypeMultipleSelector;
+    type = TFormRowTypeMultipleSelector;
   }
 
   /// 自定义选择器，配合 state 定义自己的数据 onTap 点击事件
@@ -189,7 +189,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.suffixWidget,
     this.textAlign = TextAlign.right,
   }) {
-    this.type = TFormRowTypeCustomSelector;
+    type = TFormRowTypeCustomSelector;
   }
 
   // 自定义无状态 cell
@@ -205,7 +205,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.tag,
     this.state,
     this.title = "",
-    this.widgetBuilder,
+    required this.widgetBuilder,
     this.require = true,
     this.requireMsg,
     this.validator,
@@ -241,14 +241,14 @@ class TFormRow implements TFormCloneable<TFormRow> {
 }
 
 class TFormFieldConfig {
-  double height;
-  EdgeInsets padding;
-  TextStyle titleStyle;
-  TextStyle valueStyle;
-  TextStyle placeholderStyle;
-  Divider divider;
-  Widget selectorIcon;
-  Color disableColor;
+  double? height;
+  EdgeInsets? padding;
+  TextStyle? titleStyle;
+  TextStyle? valueStyle;
+  TextStyle? placeholderStyle;
+  Divider? divider;
+  Widget? selectorIcon;
+  Color? disableColor;
 
   TFormFieldConfig({
     this.height,

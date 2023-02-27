@@ -9,34 +9,34 @@ enum TFormListType { column, sliver, builder, separated }
 class TForm extends StatefulWidget {
   final List<TFormRow> rows;
   final TFormListType listType;
-  final Divider divider;
+  final Divider? divider;
 
-  TForm({
-    Key key,
-    this.rows,
+  const TForm({
+    Key? key,
+    required this.rows,
     this.listType = TFormListType.column,
     this.divider,
   }) : super(key: key);
 
-  TForm.sliver({
-    Key key,
-    this.rows,
+  const TForm.sliver({
+    Key? key,
+    required this.rows,
     this.listType = TFormListType.sliver,
     this.divider,
   }) : super(key: key);
 
-  TForm.builder({
-    Key key,
-    this.rows,
+  const TForm.builder({
+    Key? key,
+    required this.rows,
     this.listType = TFormListType.builder,
     this.divider,
   }) : super(key: key);
 
   /// 注意 of 方法获取的是 TFormState
   static TFormState of(BuildContext context) {
-    final _TFormScope scope =
-        context.dependOnInheritedWidgetOfExactType<_TFormScope>();
-    return scope?.state;
+    final _TFormScope? scope =
+    context.dependOnInheritedWidgetOfExactType<_TFormScope>();
+    return scope?.state??TFormState([]);
   }
 
   @override
@@ -44,7 +44,7 @@ class TForm extends StatefulWidget {
 }
 
 class TFormState extends State<TForm> {
-  List<TFormRow> rows;
+  List<TFormRow> rows = [];
   get form => widget;
   get divider => widget.divider;
 
@@ -64,9 +64,9 @@ class TFormState extends State<TForm> {
   /// 表单删除，可以是单个 row，也可以使一组 rows
   void delete(item) {
     if (item is List<TFormRow>) {
-      item.forEach((element) {
+      for (var element in item) {
         rows.remove(element);
-      });
+      }
     } else if (item is TFormRow) {
       rows.remove(item);
     }
@@ -100,9 +100,9 @@ class TFormState extends State<TForm> {
 
 class _TFormScope extends InheritedWidget {
   const _TFormScope({
-    Key key,
-    Widget child,
-    this.state,
+    Key? key,
+    required Widget child,
+    required this.state,
   }) : super(key: key, child: child);
 
   final TFormState state;
@@ -113,13 +113,13 @@ class _TFormScope extends InheritedWidget {
 }
 
 class TFormList extends StatelessWidget {
-  const TFormList({Key key, this.type}) : super(key: key);
+  const TFormList({Key? key, required this.type}) : super(key: key);
 
   final TFormListType type;
 
   @override
   Widget build(BuildContext context) {
-    final rows = TForm.of(context).rows;
+    List<TFormRow> rows = TForm.of(context).rows;
     Widget list;
     switch (type) {
       case TFormListType.column:
@@ -136,12 +136,12 @@ class TFormList extends StatelessWidget {
       case TFormListType.sliver:
         list = SliverList(
             delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-          return GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-              child: TFormCell(row: rows[index]));
-        }, childCount: rows.length));
+            SliverChildBuilderDelegate((BuildContext context, int index) {
+              return GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+                  child: TFormCell(row: rows[index]));
+            }, childCount: rows.length));
         break;
       case TFormListType.builder:
         list = GestureDetector(
@@ -156,6 +156,7 @@ class TFormList extends StatelessWidget {
         );
         break;
       default:
+        list = Container();
     }
     return list;
   }

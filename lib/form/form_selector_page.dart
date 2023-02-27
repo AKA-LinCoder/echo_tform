@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TFormSelectorPage extends StatelessWidget {
   TFormSelectorPage(
-      {Key key, this.options, this.isMultipleSelector, this.title})
+      {Key? key, required this.options, required this.isMultipleSelector, required this.title})
       : super(key: key);
 
   final String title;
@@ -14,23 +14,24 @@ class TFormSelectorPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        leading: Container(),
         actions: [
           isMultipleSelector
               ? TextButton(
-                  child: Text(
-                    "完成",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  onPressed: () {
-                    String values = options
-                        .where((element) => element.selected)
-                        .map((e) => e.value)
-                        .toList()
-                        .join(",");
-                    Navigator.of(context).pop(values);
-                  },
-                )
-              : SizedBox.shrink(),
+            child: const Text(
+              "完成",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            onPressed: () {
+              String values = options
+                  .where((element) => element.selected)
+                  .map((e) => e.value)
+                  .toList()
+                  .join(",");
+              Navigator.of(context).pop(values);
+            },
+          )
+              : const SizedBox.shrink(),
         ],
       ),
       body: ListView.builder(
@@ -48,7 +49,7 @@ class TFormSelectorPage extends StatelessWidget {
 }
 
 class LTListTitle extends StatefulWidget {
-  LTListTitle({Key key, this.model, this.isMultipleSelector, this.options})
+  LTListTitle({Key? key, required this.model, required this.isMultipleSelector, required this.options})
       : super(key: key);
   final TFormOptionModel model;
   final bool isMultipleSelector;
@@ -76,16 +77,16 @@ class _LTListTitleState extends State<LTListTitle> {
       selected: widget.model.selected,
       title: Text(widget.model.value),
       trailing: widget.isMultipleSelector && widget.model.selected
-          ? Icon(Icons.done)
-          : SizedBox.shrink(),
+          ? const Icon(Icons.done)
+          : const SizedBox.shrink(),
     );
   }
 }
 
 class TFormOptionModel {
-  final int index;
+  final int? index;
   final String value;
   bool selected;
 
-  TFormOptionModel({this.value, this.selected = false, this.index});
+  TFormOptionModel({required this.value, this.selected = false,  this.index});
 }

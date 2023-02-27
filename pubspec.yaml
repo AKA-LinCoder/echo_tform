@@ -1,11 +1,11 @@
-name: tform
-description: A easy, extensible and dynamic flutter form framework. Support for custom selectors, validators and widgets. Support form verification, insert, delete and so on.
-version: 1.0.1
-homepage: https://github.com/yichahucha/tform
+name: echo_tform
+description: flutter3.0 support
+version: 0.0.1
+homepage: https://github.com/AKA-LinCoder/echo_tform
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.20.0"
+  sdk: '>=2.19.2 <3.0.0'
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:

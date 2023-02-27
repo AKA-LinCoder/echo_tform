@@ -1,13 +1,19 @@
 # tform
-
-A easy, extensible and dynamic flutter form framework. Support for custom selectors, validators and widgets. Support form verification, insert, delete and so on.
+拉去自大佬的 tform 1.0.1 ，现支持flutter3.0 原作者地址 ![tform 1.0.1](https://github.com/yichahucha/tform)
+flutter 3.0 support
 
 ## Installing
 Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  tform: ^1.0.1
+  echo_tform: ^0.0.1
+```
+
+## source from tform
+
+```
+https://github.com/yichahucha/tform
 ```
 
 ## Example
