@@ -13,15 +13,15 @@ class NextButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(const Size(double.infinity, 44)),
-          shape: MaterialStateProperty.all(
+          minimumSize: WidgetStateProperty.all(const Size(double.infinity, 44)),
+          shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(44 / 2)),
           ),
           backgroundColor:
-              MaterialStateProperty.all(Theme.of(context).primaryColor)),
+              WidgetStateProperty.all(Theme.of(context).primaryColor)),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.button?.copyWith(color: Colors.white),
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
       ),
     );
   }

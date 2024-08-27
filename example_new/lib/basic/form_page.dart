@@ -77,7 +77,7 @@ List<TFormRow> buildFormRows() {
       textAlign: TextAlign.right,
       validator: (row) {
         return RegExp(
-                r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$')
+            r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$')
             .hasMatch(row.value??'');
       },
     ),
@@ -105,7 +105,7 @@ List<TFormRow> buildFormRows() {
           onTap: () {
             row.state = !row.state;
             row.obscureText = !(row.obscureText??false);
-            TForm.of(context).reload();
+            TForm.of(context)?.reload();
           },
           child: Image.asset(
             row.state ? "lib/src/eyes_open.png" : "lib/src/eyes_close.png",
@@ -131,9 +131,9 @@ List<TFormRow> buildFormRows() {
         String value = await showPicker(row.state[0], context);
         if (row.value != value) {
           if (value == "已婚") {
-            TForm.of(context).insert(row, row.state[1]);
+            TForm.of(context)?.insert(row, row.state[1]);
           } else {
-            TForm.of(context).delete(row.state[1]);
+            TForm.of(context)?.delete(row.state[1]);
           }
         }
         return value;
@@ -166,7 +166,7 @@ List<TFormRow> buildFormRows() {
         return showPickerDate(context);
       },
       fieldConfig: TFormFieldConfig(
-        selectorIcon: const SizedBox.shrink(),
+        selectorIcon: SizedBox.shrink(),
       ),
     ),
     TFormRow.customCell(
@@ -175,7 +175,7 @@ List<TFormRow> buildFormRows() {
           height: 48,
           width: double.infinity,
           alignment: Alignment.center,
-          child: const Text("------ 我是自定义的Cell ------")),
+          child: Text("------ 我是自定义的Cell ------")),
     ),
     TFormRow.customCellBuilder(
       title: "房屋照片",

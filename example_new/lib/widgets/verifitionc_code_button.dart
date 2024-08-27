@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 ///验证码按钮
 class VerifitionCodeButton extends StatefulWidget {
-  VerifitionCodeButton({Key? key, required this.onPressed, required this.seconds, required this.title})
+  const VerifitionCodeButton({Key? key, required this.onPressed, required this.seconds, required this.title})
       : super(key: key);
 
   final void Function() onPressed;
@@ -39,8 +39,8 @@ class _VerifitionCodeButtonState extends State<VerifitionCodeButton> {
     return TextButton(
         onPressed: () {
           if (timer == null) {
-            if (widget.onPressed != null) widget.onPressed();
-            timer = Timer.periodic(Duration(seconds: 1), (_) {
+            widget.onPressed();
+            timer = Timer.periodic(const Duration(seconds: 1), (_) {
               seconds--;
               if (seconds == 0) {
                 text = widget.title;
@@ -48,7 +48,7 @@ class _VerifitionCodeButtonState extends State<VerifitionCodeButton> {
                 timer?.cancel();
                 timer = null;
               } else {
-                text = seconds.toString() + "s";
+                text = "${seconds}s";
               }
               setState(() {});
             });
@@ -57,8 +57,7 @@ class _VerifitionCodeButtonState extends State<VerifitionCodeButton> {
         child: Text(
           text,
           style: Theme.of(context)
-              .textTheme
-              .button
+              .textTheme.titleMedium
               ?.copyWith(color: Theme.of(context).primaryColor),
         ));
   }

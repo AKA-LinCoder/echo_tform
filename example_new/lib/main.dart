@@ -11,7 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
@@ -27,12 +27,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("示例"),
+        title: const Text("示例"),
       ),
       body: ListView(
         children: [
           ListTile(
-            title: Text("基本使用"),
+            title: const Text("基本使用"),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -41,12 +41,12 @@ class HomePage extends StatelessWidget {
               );
             },
           ),
-          Divider(
+          const Divider(
             height: 0.5,
             thickness: 0.5,
           ),
           ListTile(
-            title: Text("动态表单"),
+            title: const Text("动态表单"),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
               );
             },
           ),
-          Divider(
+          const Divider(
             height: 0.5,
             thickness: 0.5,
           ),

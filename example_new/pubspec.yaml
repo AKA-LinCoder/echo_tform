@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   fluttertoast:
-  flutter_picker:
+  flutter_picker_plus:
   image_picker:
   image_picker_for_web:
   date_format:

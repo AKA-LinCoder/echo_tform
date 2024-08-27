@@ -88,6 +88,7 @@ class _TFormFieldState extends State<TFormField> {
       placeholder: row.placeholder ?? "",
       keyboardType: row.keyboardType,
       maxLength: row.maxLength,
+      maxLines: row.maxLines ?? 1,
       style:
       !_enabled ? _valueStyle.copyWith(color: _disableColor) : _valueStyle,
       placeholderStyle: row.fieldConfig?.placeholderStyle ??
@@ -108,6 +109,7 @@ class _TFormFieldState extends State<TFormField> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => TFormSelectorPage(
+                    needSearch: row.needSearch??false,
                     title: row.title,
                     options: (row.options??[])
                         .every((element) => (element is TFormOptionModel))

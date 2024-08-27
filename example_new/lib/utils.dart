@@ -1,6 +1,6 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_picker/flutter_picker.dart';
+import 'package:flutter_picker_plus/picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 

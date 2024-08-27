@@ -11,21 +11,21 @@ class TForm extends StatefulWidget {
   final TFormListType listType;
   final Divider? divider;
 
-  const TForm({
+  TForm({
     Key? key,
     required this.rows,
     this.listType = TFormListType.column,
     this.divider,
   }) : super(key: key);
 
-  const TForm.sliver({
+  TForm.sliver({
     Key? key,
     required this.rows,
     this.listType = TFormListType.sliver,
     this.divider,
   }) : super(key: key);
 
-  const TForm.builder({
+  TForm.builder({
     Key? key,
     required this.rows,
     this.listType = TFormListType.builder,
@@ -33,10 +33,10 @@ class TForm extends StatefulWidget {
   }) : super(key: key);
 
   /// 注意 of 方法获取的是 TFormState
-  static TFormState of(BuildContext context) {
+  static TFormState? of(BuildContext context) {
     final _TFormScope? scope =
     context.dependOnInheritedWidgetOfExactType<_TFormScope>();
-    return scope?.state??TFormState([]);
+    return scope?.state;
   }
 
   @override
@@ -44,7 +44,7 @@ class TForm extends StatefulWidget {
 }
 
 class TFormState extends State<TForm> {
-  List<TFormRow> rows = [];
+  List<TFormRow> rows;
   get form => widget;
   get divider => widget.divider;
 
@@ -64,9 +64,9 @@ class TFormState extends State<TForm> {
   /// 表单删除，可以是单个 row，也可以使一组 rows
   void delete(item) {
     if (item is List<TFormRow>) {
-      for (var element in item) {
+      item.forEach((element) {
         rows.remove(element);
-      }
+      });
     } else if (item is TFormRow) {
       rows.remove(item);
     }
@@ -119,8 +119,8 @@ class TFormList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<TFormRow> rows = TForm.of(context).rows;
-    Widget list;
+    final rows = TForm.of(context)?.rows??[];
+    late Widget list;
     switch (type) {
       case TFormListType.column:
         list = GestureDetector(
@@ -156,8 +156,9 @@ class TFormList extends StatelessWidget {
         );
         break;
       default:
-        list = Container();
     }
     return list;
   }
 }
+
+

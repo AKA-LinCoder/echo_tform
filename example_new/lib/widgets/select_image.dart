@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SelectImageView extends StatefulWidget {
-  SelectImageView({Key? key,  this.selected}) : super(key: key);
+  const SelectImageView({Key? key,  this.selected}) : super(key: key);
 
   final Future Function(File image)? selected;
 
@@ -20,7 +20,7 @@ class _SelectImageViewState extends State<SelectImageView> {
 
   Future<bool> _getImage(ImageSource source) async {
     try {
-      final pickedFile = await _picker.getImage(source: source);
+      final pickedFile = await _picker.pickImage(source: source);
       if (pickedFile != null) {
         _image = File(pickedFile.path);
         return true;
@@ -91,7 +91,7 @@ class _SelectImageViewState extends State<SelectImageView> {
                     ? kIsWeb
                         ? Image.network(_image?.path??'')
                         : Image.file(_image!)
-                    : SizedBox.shrink()),
+                    : const SizedBox.shrink()),
       ),
     );
   }

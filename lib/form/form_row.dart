@@ -6,6 +6,7 @@ const TFormRowTypeCustomSelector = "TFormRowTypeCustomSelector";
 const TFormRowTypeSelector = "TFormRowTypeSelector";
 const TFormRowTypeMultipleSelector = "TFormRowTypeMultipleSelector";
 
+
 abstract class TFormCloneable<T extends TFormCloneable<T>> {
   T clone();
 }
@@ -44,8 +45,14 @@ class TFormRow implements TFormCloneable<TFormRow> {
   /// 输入框长度限制
   int? maxLength;
 
+  /// 输入框最大行数
+  int? maxLines;
+
   /// 输入框内容是否加密
   bool? obscureText;
+
+  ///是否需要搜索框
+  bool? needSearch;
 
   /// 键盘类型
   TextInputType? keyboardType;
@@ -101,6 +108,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.options,
     this.onChanged,
     this.onTap,
+    this.maxLines,
     this.validator,
     this.fieldConfig,
     this.keyboardType,
@@ -124,6 +132,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.suffixWidget,
     this.maxLength,
     this.fieldConfig,
+    this.maxLines,
     this.keyboardType,
     this.clearButtonMode = OverlayVisibilityMode.editing,
     this.obscureText,
@@ -132,6 +141,32 @@ class TFormRow implements TFormCloneable<TFormRow> {
   }) {
     type = TFormRowTypeInput;
   }
+
+  // /// 多行输入
+  // TFormRow.multipleInput({
+  //   this.tag,
+  //   this.title = "",
+  //   this.value = "",
+  //   this.placeholder = "请输入",
+  //   this.require = true,
+  //   this.requireStar = false,
+  //   this.enabled = true,
+  //   this.requireMsg,
+  //   this.onChanged,
+  //   this.validator,
+  //   this.suffixWidget,
+  //   this.maxLength,
+  //   this.maxLine,
+  //   this.fieldConfig,
+  //   this.keyboardType,
+  //   this.clearButtonMode = OverlayVisibilityMode.editing,
+  //   this.obscureText,
+  //   this.state,
+  //   this.textAlign = TextAlign.left,
+  // }) {
+  //   type = TFormRowTypeMultipleInput;
+  // }
+
 
   /// 单选
   TFormRow.selector({
@@ -144,6 +179,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.enabled = true,
     this.requireMsg,
     this.options,
+    this.needSearch = false,
     this.validator,
     this.fieldConfig,
     this.suffixWidget,
@@ -162,6 +198,7 @@ class TFormRow implements TFormCloneable<TFormRow> {
     this.requireStar = false,
     this.enabled = true,
     this.requireMsg,
+    this.needSearch = false,
     this.options,
     this.validator,
     this.fieldConfig,
@@ -261,3 +298,4 @@ class TFormFieldConfig {
     this.disableColor,
   });
 }
+

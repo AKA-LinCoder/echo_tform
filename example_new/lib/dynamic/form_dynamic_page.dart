@@ -18,7 +18,7 @@ class FormDynamicPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("动态表单"),
+        title: const Text("动态表单"),
       ),
       body: FutureBuilder(
         future: getData(),
@@ -29,7 +29,7 @@ class FormDynamicPage extends StatelessWidget {
                 TForm.sliver(
                   key: _dynamicFormKey,
                   rows: snapshot.data,
-                  divider: Divider(
+                  divider: const Divider(
                     height: 0.5,
                     thickness: 0.5,
                   ),
@@ -58,7 +58,7 @@ class FormDynamicPage extends StatelessWidget {
               ],
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },
@@ -135,24 +135,28 @@ TFormRow? getRow(e) {
         requireStar: e["mustinput"],
         options: (e["options"] as List).map((e) => e["selectvalue"]).toList(),
         onTap: (context, row) async {
+          TFormState? state = TForm.of(context);
           String value = await showPicker(row.options??[], context);
           if (value == "已婚") {
-            TForm.of(context).insert(row, row.state);
+
+            state?.insert(row, row.state);
+
+            // TForm.of(context).insert(row, row.state);
           } else {
-            TForm.of(context).delete(row.state);
+            state?.delete(row.state);
           }
           return value;
         },
       );
-      (e["options"] as List).forEach((element) {
+      for (var element in (e["options"] as List)) {
         if (element["isOpen"] == "1") {
           List<TFormRow?> rows = [];
-          (element["extra"] as List).forEach((element) {
+          for (var element in (element["extra"] as List)) {
             rows.add(getRow(element));
-          });
+          }
           row?.state = rows;
         }
-      });
+      }
       break;
     case 6:
       row = TFormRow.input(
@@ -170,7 +174,7 @@ TFormRow? getRow(e) {
               row.state = "1";
               showToast("验证成功",context);
             },
-            child: Text(
+            child: const Text(
               "验证",
               textAlign: TextAlign.right,
               style: TextStyle(color: Colors.blue),
