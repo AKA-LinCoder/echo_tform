@@ -41,6 +41,7 @@ class FormDynamicPage extends StatelessWidget {
                     child: NextButton(
                       title: "提交",
                       onPressed: () {
+                        (_dynamicFormKey.currentState as TFormState).getValues();
                         //校验
                         List errors =
                             (_dynamicFormKey.currentState as TFormState)

@@ -3,7 +3,7 @@ import 'package:example_new/widgets/select_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomPhotosWidget extends StatelessWidget {
-  CustomPhotosWidget({
+  const CustomPhotosWidget({
     Key? key,
     required this.row,
   }) : super(key: key);
@@ -13,7 +13,7 @@ class CustomPhotosWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       child: Column(
         children: [
           Container(
@@ -21,7 +21,7 @@ class CustomPhotosWidget extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               row.title,
-              style: TextStyle(fontSize: 15, color: Colors.black87),
+              style: const TextStyle(fontSize: 15, color: Colors.black87),
             ),
           ),
           Container(

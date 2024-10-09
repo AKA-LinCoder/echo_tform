@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../utils.dart';
 import '../widgets/photos_cell.dart';
 import '../widgets/verifitionc_code_button.dart';
+import 'customItem.dart';
 
 class FormPage extends StatelessWidget {
   FormPage({Key? key}) : super(key: key);
@@ -16,14 +17,16 @@ class FormPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text("表单"),
+        title: const Text("表单"),
         actions: [
           TextButton(
-            child: Text(
+            child: const Text(
               "提交",
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             onPressed: () {
+
+              (_formKey.currentState as TFormState).getValues();
               //校验
               List errors = (_formKey.currentState as TFormState).validate();
               if (errors.isNotEmpty) {
@@ -39,7 +42,7 @@ class FormPage extends StatelessWidget {
       body: TForm.builder(
         key: _formKey,
         rows: buildFormRows(),
-        divider: Divider(
+        divider: const Divider(
           height: 1,
         ),
       ),
@@ -55,9 +58,9 @@ List<TFormRow> buildFormRows() {
       value: "呀哈哈",
       fieldConfig: TFormFieldConfig(
         height: 100,
-        titleStyle: TextStyle(color: Colors.red, fontSize: 20),
-        valueStyle: TextStyle(color: Colors.orange, fontSize: 30),
-        placeholderStyle: TextStyle(color: Colors.green, fontSize: 25),
+        titleStyle: const TextStyle(color: Colors.red, fontSize: 20),
+        valueStyle: const TextStyle(color: Colors.orange, fontSize: 30),
+        placeholderStyle: const TextStyle(color: Colors.green, fontSize: 25),
       ),
     ),
     TFormRow.input(
@@ -131,7 +134,7 @@ List<TFormRow> buildFormRows() {
         String value = await showPicker(row.state[0], context);
         if (row.value != value) {
           if (value == "已婚") {
-            TForm.of(context)?.insert(row, row.state[1]);
+            TForm.of(context)?.insertBefore(row, row.state[1]);
           } else {
             TForm.of(context)?.delete(row.state[1]);
           }
@@ -166,7 +169,7 @@ List<TFormRow> buildFormRows() {
         return showPickerDate(context);
       },
       fieldConfig: TFormFieldConfig(
-        selectorIcon: SizedBox.shrink(),
+        selectorIcon: const SizedBox.shrink(),
       ),
     ),
     TFormRow.customCell(
@@ -175,7 +178,7 @@ List<TFormRow> buildFormRows() {
           height: 48,
           width: double.infinity,
           alignment: Alignment.center,
-          child: Text("------ 我是自定义的Cell ------")),
+          child: const Text("------ 我是自定义的Cell ------")),
     ),
     TFormRow.customCellBuilder(
       title: "房屋照片",
@@ -199,5 +202,18 @@ List<TFormRow> buildFormRows() {
         return CustomPhotosWidget(row: row);
       },
     ),
+
+    ///自定义添加
+    TFormRow.customCellBuilder(
+      title: "添加模块",
+      state: <int,dynamic>{},
+      validator: (row) =>true,
+      widgetBuilder: (context, row) {
+        return AddBill(row: row);
+
+      },
+    ),
+
+
   ];
 }

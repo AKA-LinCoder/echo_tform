@@ -61,6 +61,17 @@ class TFormState extends State<TForm> {
     reload();
   }
 
+
+  void insertBefore(currentRow, item) {
+    if (item is List<TFormRow>) {
+      rows.insertAll(rows.indexOf(currentRow),
+          item.map((e) => e..animation = true).toList());
+    } else if (item is TFormRow) {
+      rows.insert(rows.indexOf(currentRow)-1, item..animation = true);
+    }
+    reload();
+  }
+
   /// 表单删除，可以是单个 row，也可以使一组 rows
   void delete(item) {
     if (item is List<TFormRow>) {
@@ -86,6 +97,10 @@ class TFormState extends State<TForm> {
     FocusScope.of(context).requestFocus(FocusNode());
     List errors = formValidationErrors(rows);
     return errors;
+  }
+
+  getValues(){
+    getValue(rows);
   }
 
   @override
@@ -114,9 +129,7 @@ class _TFormScope extends InheritedWidget {
 
 class TFormList extends StatelessWidget {
   const TFormList({Key? key, required this.type}) : super(key: key);
-
   final TFormListType type;
-
   @override
   Widget build(BuildContext context) {
     final rows = TForm.of(context)?.rows??[];

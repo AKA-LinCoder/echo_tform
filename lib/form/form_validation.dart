@@ -18,3 +18,13 @@ List formValidationErrors(List<TFormRow> rows) {
   }
   return errors;
 }
+
+
+List getValue(List<TFormRow> rows) {
+  List errors = [];
+  for (var row in rows) {
+    print("这是填写的值");
+    print(row.value);
+  }
+  return errors;
+}
